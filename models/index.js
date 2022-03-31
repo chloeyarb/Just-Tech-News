@@ -11,7 +11,7 @@ Post.belongsTo(User, {
     foreignKey: 'user_id',
 });
 
-module.exports = { User,Post };
+module.exports = { User, Post };
 
 
 // Import the User model and exporting an object with it as a property
