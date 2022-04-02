@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../../models');
+const { Post, User, Vote } = require('../../models');
 
 // Get all users posts
 router.get('/', (req, res) => {
@@ -61,6 +61,17 @@ router.post('/', (req, res) => {
         console.log(err);
         res.status(500).json(err);
     });
+});
+
+// PUT /api/post/upvote. This PUT route before the :id because Express will think upvote is a valide id.
+router.put('/upvote', (req, res) => {
+    Vote.create({
+        user_id: req.body.user_id,
+        post_id: req.body.post_id
+    })
+        .then(dbPostData => res.json(dbPostData))
+        .catch(err => res.json(err));
+
 });
 
 // Update a posts title
